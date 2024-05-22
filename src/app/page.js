@@ -27,6 +27,8 @@ export default function Home() {
         PUBLIC_KEY
       )
       alert('메일 전송이 완료되었습니다. 담당자 확인후 연락드리겠습니다.')
+      form.current.reset()
+      setInputCount(0)
     } catch (error) {
       alert('메일 전송이 실패하였습니다. 다시 시도해주세요.')
     }
@@ -35,21 +37,21 @@ export default function Home() {
 return (
     <Box p={'12px 48px'}>
       <Flex flexDir={'column'} justifyContent={'center'} alignItems={'center'}  w={'100%'} >
-          <Image src='/logo.png' alt='logo' w='75%' mt={'-70px'}/>
+          <Image src='/logo.png' alt='logo' w='100%' mt={'-70px'}/>
         <form ref={form} onSubmit={onSubmitForm} id='submit'>
-          <Flex w={'100%'} flexDir={'column'}  gap={'8px'} px={'24px'}>
+          <Flex w={'100%'} flexDir={'column'}  gap={'16px'} px={'24px'} mt={'-14%'}>
           <CommonInput type="text" name="to_name" required defaultValue={'류연석'} hidden/>
-          <CommonInput label={'이름'} type="text" name="from_name" required defaultValue={'test_name'}/>
-          <CommonInput label={'전화번호'} type="text" name="from_phone" required defaultValue={'01033039144'}/>
+          <CommonInput label={'이름'} type="text" name="from_name" required  placeholder='성함을 입력해주세요'/>
+          <CommonInput label={'전화번호'} type="text" name="from_phone" required placeholder='연락받으실 전화번호를 입력해주세요!'/>
             <Box pos='relative'>
-            <Text sx={{ fontsize:'14px', fontWeight:'600', pb:'6px' }}>메모</Text>
+            <Text sx={{ fontsize:'14px', fontWeight:'600', pb:'6px' }}>견적문의 내용</Text>
             <Textarea
+                required
                 name="message" 
                 minW='352px'
                 minH='240px'
-                placeholder='메모를 입력해주세요.'
+                placeholder='매장에 대한 문의사항을 자유롭게 작성해주세요. ex) 매장위치, 면적, 매출액 등등'
                 resize='none'
-                defaultValue={'강화읍 관청리 1-2번지 2층 매장은 24평이고 테이블은 8개쯤 되고 매출은 한달에 4000천정도 됩니다. 소주 맥주 그리고 지원이라던지 단가 궁금해서 문의드립니다.'}
                 onChange={onTextareaHandler}
                 _focus={{ boxShadow: '0px 0px 0px 4px #195AFF3D' }}
                 maxLength={501}
@@ -74,7 +76,7 @@ return (
               </Box>
             </Box>
 
-          <Button bg={'#FFFFFF'} border={'1px solid #EAECF0'} _hover={{ bg: '#195AFF'}} type="submit" w='100%' form='submit'>견적신청 하기</Button>
+          <Button bg={'#FFFFFF'} border={'1px solid #EAECF0'} _hover={{ bg: '#195AFF', color: '#FFFFFF'}} type="submit" w='100%' form='submit'>견적신청 하기</Button>
           </Flex>
         </form>
         </Flex>
