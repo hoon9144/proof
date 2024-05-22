@@ -37,11 +37,11 @@ export default function Home() {
 return (
     <Box p={'12px 48px'}>
       <Flex flexDir={'column'} justifyContent={'center'} alignItems={'center'}  w={'100%'} >
-          <Image src='/logo.png' alt='logo' w='100%' mt={'-70px'}/>
+          <Image src='/logo.png' alt='logo' w='84%' mt={'20px'} mr={'4px'}/>
         <form ref={form} onSubmit={onSubmitForm} id='submit'>
-          <Flex w={'100%'} flexDir={'column'}  gap={'16px'} px={'24px'} mt={'-14%'}>
+          <Flex w={'100%'} flexDir={'column'}  gap={'16px'} px={'24px'} mt={'16px'}>
           <CommonInput type="text" name="to_name" required defaultValue={'류연석'} hidden/>
-          <CommonInput label={'이름'} type="text" name="from_name" required  placeholder='성함을 입력해주세요'/>
+          <CommonInput label={'이름'} type="text" name="from_name" required  placeholder='이름을 입력해주세요'/>
           <CommonInput label={'전화번호'} type="text" name="from_phone" required placeholder='연락받으실 전화번호를 입력해주세요!'/>
             <Box pos='relative'>
             <Text sx={{ fontsize:'14px', fontWeight:'600', pb:'6px' }}>견적문의 내용</Text>
