@@ -8,6 +8,7 @@ const { useState } = require('react')
 export default function Home() {
   const [inputCount, setInputCount] = useState(0)
   const [isInvalid, setIsInvalid] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
   const onTextareaHandler = (e) => {
     e.target.value.length > 500 ? setIsInvalid(true) : setIsInvalid(false)
     setInputCount(e.target.value.length)
@@ -36,7 +37,7 @@ export default function Home() {
 
 return (
     <Box p={'12px 48px'}>
-      <Flex flexDir={'column'} justifyContent={'center'} alignItems={'center'}  w={'100%'} >
+      <Flex flexDir={'column'} justifyContent={'center'} alignItems={'center'}  w={'100%'}>
           <Image src='/logo.png' alt='logo' w='84%' mt={'20px'} mr={'4px'}/>
         <form ref={form} onSubmit={onSubmitForm} id='submit'>
           <Flex w={'100%'} flexDir={'column'}  gap={'16px'} px={'24px'} mt={'16px'}>
@@ -75,12 +76,15 @@ return (
               {inputCount}/500
             </Box>
           </Box>
-
-          <Checkbox size='md' colorScheme='pink' name='from_checked' fontWeight={600} sx={{ fontSize:'12px'}} cursor={'pointer'} required>
-              <Tooltip label={agreeText} w={'100%'} p='12px 16px' borderRadius='8px' bg={'#0C111D'}>
+          
+          <Flex justifyContent={'space-between'} alignItems={'center'}>
+            <Checkbox size='md' colorScheme='pink' name='from_checked' fontWeight={600} sx={{ fontSize:'12px'}} cursor={'pointer'} required>
+              <Tooltip label={agreeText} w={'100%'} p='12px 16px' borderRadius='8px' bg={'#0C111D'} isOpen={isChecked}>
               [필수]개인정보 수집 및 이용 동의
               </Tooltip>
             </Checkbox>
+            <Text sx={{ fontSize:'12px', color: 'gray', fontWeight: '600' }} onTouchStart={() => setIsChecked(!isChecked)}>약관보기</Text>
+          </Flex>
           <Button bg={'#FFFFFF'} border={'1px solid #EAECF0'} _hover={{ bg: '#195AFF', color: '#FFFFFF'}} type="submit" w='100%' form='submit'>견적신청 하기</Button>
           </Flex>
         </form>
