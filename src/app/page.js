@@ -9,6 +9,12 @@ export default function Home() {
   const [inputCount, setInputCount] = useState(0)
   const [isInvalid, setIsInvalid] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
+  const [isOpened, setIsOpened] = useState(false)
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+  };
+
   const onTextareaHandler = (e) => {
     e.target.value.length > 500 ? setIsInvalid(true) : setIsInvalid(false)
     setInputCount(e.target.value.length)
@@ -18,9 +24,8 @@ export default function Home() {
   const onSubmitForm = (event) => {
     event.preventDefault()
 
-    console.log(form.current);
-
     try {
+      if(!isChecked) alert('개인정보 수집 및 이용에 동의해주세요.')
       emailjs.sendForm(
         SERVICE_ID,
         TEMPLATE_ID,
@@ -29,6 +34,7 @@ export default function Home() {
       )
       alert('메일 전송이 완료되었습니다. 담당자 확인후 연락드리겠습니다.')
       form.current.reset()
+      setIsChecked(false)
       setInputCount(0)
     } catch (error) {
       alert('메일 전송이 실패하였습니다. 다시 시도해주세요.')
@@ -78,14 +84,15 @@ return (
           </Box>
           
           <Flex justifyContent={'space-between'} alignItems={'center'}>
-            <Checkbox size='md' colorScheme='pink' name='from_checked' fontWeight={600} sx={{ fontSize:'12px'}} cursor={'pointer'} required>
-              <Tooltip label={agreeText} w={'100%'} p='12px 16px' borderRadius='8px' bg={'#0C111D'} isOpen={isChecked}>
+            <Checkbox size='md' colorScheme='pink' name='from_checked' fontWeight={600} sx={{ fontSize:'12px'}} cursor={'pointer'} isChecked={isChecked}
+             onChange={handleCheckboxChange}>
+              <Tooltip label={agreeText} w={'100%'} p='12px 16px' borderRadius='8px' bg={'#0C111D'} isOpen={isOpened}>
               [필수]개인정보 수집 및 이용 동의
               </Tooltip>
             </Checkbox>
-            <Text sx={{ fontSize:'12px', color: 'gray', fontWeight: '600' }} onTouchStart={() => setIsChecked(!isChecked)}>약관보기</Text>
+            <Text sx={{ fontSize:'12px', color: 'gray', fontWeight: '600' }} onTouchStart={() => setIsOpened(!isOpened)}>약관보기</Text>
           </Flex>
-          <Button bg={'#FFFFFF'} border={'1px solid #EAECF0'} _hover={{ bg: '#195AFF', color: '#FFFFFF'}} type="submit" w='100%' form='submit'>견적신청 하기</Button>
+            <Button bg={'#FFFFFF'} border={'1px solid #EAECF0'} _hover={{ bg: '#195AFF', color: '#FFFFFF'}} type="submit" w='100%' form='submit'>견적신청 하기</Button>
           </Flex>
         </form>
         </Flex>
