@@ -12,6 +12,7 @@ export default function Home() {
   const [isOpened, setIsOpened] = useState(false)
 
   const handleCheckboxChange = (e) => {
+    if(e.target.checked) setIsOpened(false)
     setIsChecked(e.target.checked);
   };
 
