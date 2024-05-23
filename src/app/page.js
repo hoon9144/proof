@@ -25,7 +25,7 @@ export default function Home() {
     event.preventDefault()
 
     try {
-      if(!isChecked) alert('개인정보 수집 및 이용에 동의해주세요.')
+      if(!isChecked) return alert('개인정보 수집 및 이용에 동의해주세요.')
       emailjs.sendForm(
         SERVICE_ID,
         TEMPLATE_ID,
